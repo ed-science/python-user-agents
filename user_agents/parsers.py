@@ -73,9 +73,7 @@ TOUCH_CAPABLE_DEVICE_FAMILIES = (
     'Kindle'
 )
 
-EMAIL_PROGRAM_FAMILIES = set((
-    'Outlook',
-    'Windows Live Mail',
+EMAIL_PROGRAM_FAMILIES = {
     'AirMail',
     'Apple Mail',
     'Outlook',
@@ -89,8 +87,8 @@ EMAIL_PROGRAM_FAMILIES = set((
     'Barca',
     'MailBar',
     'kmail2',
-    'YahooMobileMail'
-))
+    'YahooMobileMail',
+}
 
 def verify_attribute(attribute):
     if isinstance(attribute, string_types) and attribute.isdigit():
@@ -172,13 +170,13 @@ class UserAgent(object):
         return False
 
     def get_device(self):
-        return self.is_pc and "PC" or self.device.family
+        return "PC" if self.is_pc else self.device.family
 
     def get_os(self):
-        return ("%s %s" % (self.os.family, self.os.version_string)).strip()
+        return f"{self.os.family} {self.os.version_string}".strip()
 
     def get_browser(self):
-        return ("%s %s" % (self.browser.family, self.browser.version_string)).strip()
+        return f"{self.browser.family} {self.browser.version_string}".strip()
 
     @property
     def is_tablet(self):

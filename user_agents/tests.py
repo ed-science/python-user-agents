@@ -273,4 +273,4 @@ def test_wrapper(items):
 
 for device, items in compat.iteritems(devices):
     items['user_agent'] = parse(items['ua_string'])
-    setattr(UserAgentsTest, 'test_' + device, test_wrapper(items))
+    setattr(UserAgentsTest, f'test_{device}', test_wrapper(items))
